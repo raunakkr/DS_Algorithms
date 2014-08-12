@@ -1,0 +1,61 @@
+// Move coin on table to take it to destination with minimum chnages
+#include<stdio.h>
+#include<limits.h>
+
+	int n,m;
+	char a[51][51];
+
+  int min(int a,int b){return a<b?a:b;}
+
+int min_move(int p,int q,int k){
+
+		 int i,j,t=0;
+		 i=p;j=q;
+
+		 if(k<0 || p>n-1 || q>m-1 ) return 9999;
+			 // printf("%d-%d\n",i,j);
+		while(t<=k && i<n && j<m){
+          //printf("mmmm%d-%d\n",i,j);
+		  if(a[i][j]=='U') i--;
+		  else if(a[i][j]=='L') j--;
+		  else if(a[i][j]=='D')  i++;
+		  else if(a[i][j]=='R')  j++;
+		  else if(a[i][j]=='*')  return 0;
+
+
+
+		  t++;
+		}
+
+		//Now check coin reached the destination
+			if(i<n && j<m &&a[i][j]=='*') return 0;
+
+			return 1+min(min(min_move(p-1,q,k-1),min_move(p,q-1,k-1)),min(min_move(p+1,q,k-1),min_move(p,q+1,k-1)));
+
+}
+
+
+
+
+
+
+
+
+
+int main(){
+   int k,i,j,flag;
+  flag=0;
+    scanf("%d",&n);scanf("%d",&m);scanf("%d",&k);
+
+	for(i=0;i<n;i++) {
+	  for(j=0;j<m;j++) {
+			 scanf(" %c",&a[i][j]);
+				 }}
+		 flag=min_move(0,0,k);
+
+		 if (flag>m*n*3) printf("-1");
+   else
+	printf("%d",flag);
+
+return 0;
+}

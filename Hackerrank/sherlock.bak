@@ -1,0 +1,51 @@
+#include<stdio.h>
+
+ int gcd(n,m) {
+if (n%m ==0)
+ return m;
+ n = n%m;
+ return gcd(m,n); }
+
+void is_subset_found(int a[],int n){
+
+  int i,j;
+
+  for(i=0;i<n-1;i++){
+	  for(j=i+1;j<n;j++) {
+		  if(i>j){
+		 if(gcd(i,j)<=1) {
+		 printf("YES\n");
+		 return;   }
+		 }
+			  else {if(gcd(i,j)<=1) {
+		 printf("NO\n");
+		 return;   }}
+
+
+		 }
+		 }
+
+	  printf("NO");
+
+}
+
+
+
+int main(){
+ /* int i,j,t,n[10];
+  long int a[100];
+  scanf("%d",&t);
+  for(i=0;i<t;i++){
+	 scanf("%d",&n[i]);
+	 for(j=0;j<n[i];j++)
+		 scanf("%ld",&a[j]);
+		 }
+
+	 for(i=0;i<t;i++)
+		is_subset_found(a[i],n[i]); */
+
+      printf("%d",gcd(4,2));
+
+
+return 0;
+}

@@ -1,0 +1,30 @@
+//Program to find angle b/w hour and minute hands of a clock
+#include<stdio.h>
+
+
+ int min(int a,int b){return a<b?a:b;}
+
+
+ int find_angle(int hour,int minute){
+	 int mint,angle,hr;
+	 if(minute==0){mint=12;hour=hour-1;}
+		else if(minute>=5) mint=minute/5;
+		 else mint=minute%5;
+
+ angle=min(hour+12-mint,abs(hour-mint));
+ angle=angle*30 -(mint*5/2);
+ return angle;
+
+ }
+
+
+
+
+
+
+void main(){
+
+printf("Angle   %d",find_angle(8,45));
+
+
+}

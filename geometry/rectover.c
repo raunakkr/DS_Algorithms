@@ -1,0 +1,32 @@
+//Rectangle Overlap
+#include<stdio.h>
+
+
+//Declare a point
+struct point{
+  int x,y;
+  };
+
+
+
+  int is_overlapping(struct point p,struct point q,struct point a,struct point b){
+
+	//wrong
+	  if((p.x<=a.x && a.x<=q.x) && (p.y>=a.y && a.y>=q.y))
+			  return 1;
+
+	  if((a.x<=p.x && p.x<=b.x) && (a.y>=p.y && p.y>=b.y))
+			  return 1;
+
+		return 0;
+  }
+
+void main(){
+
+ struct point p={5,10};
+ struct point q={10,0};
+ struct point a={15,5};
+ struct point b={15,0};
+
+  is_overlapping(p,q,a,b)?printf("Overlapping"):printf("Not overlapping");
+}

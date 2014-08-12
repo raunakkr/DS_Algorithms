@@ -1,0 +1,24 @@
+//Program to implement ATOI()    :: WIthout all test cases
+#include<stdio.h>
+#include<string.h>
+
+
+
+int atoi(char *str){
+ int len,i,res=0;
+ if(!str)return res;
+	 len=strlen(str);
+ for(i=0;i<len;i++)
+	res=res*10+(int)str[i]-(int)'0';
+     //printf("%d\n",(int)str[i]+'0'-96);
+	return res;
+
+}
+
+
+
+void main(){
+ char str[]="003";
+ printf("Integer equivalent is  %d",atoi(str));
+
+}

@@ -1,0 +1,41 @@
+//Check if this is fibonacci no
+#include<stdio.h>
+#include<math.h>
+
+int is_perfect_sqr( long int n){
+
+	 long int  s = sqrtl(n);
+	 return (s*s==n);
+
+
+}
+
+
+int is_fibo(long int n){
+	printf("%ld\n",n);
+ return (is_perfect_sqr(5*n*n-4) || is_perfect_sqr(5*n*n+4));
+
+
+
+}
+
+
+
+
+int main(){
+
+ //if( is_fibo(9148500612))printf("IsFibo\n");else printf("IsNotFibo\n");
+  long int t,i;
+	 unsigned long  a[1];
+	 scanf("%ld",&t);
+	 for(i=0;i<t;i++) {
+		  scanf("%lu",&a[i]);
+         printf("%lu\n",a[i]);
+		  }
+
+	// for(i=0;i<t;i++)
+		// if( is_fibo(a[0]))printf("IsFibo\n");else printf("IsNotFibo\n");
+
+return 0;
+
+}

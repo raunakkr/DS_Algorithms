@@ -1,0 +1,55 @@
+//:: Icecream parlour
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+
+ void print_index(int a[],int n,int data){
+
+		int i;
+		int *h=(int*)calloc(sizeof(int),100);
+
+		for(i=1;i<=n;i++)
+			  h[a[i-1]]=i;
+
+	 for(i=0;i<n;i++){
+
+		if(data-a[i]>=0 &&h[data-a[i]] && h[data-a[i]]!=i+1 ){
+		printf("%d %d\n",i+1,h[data-a[i]]);
+		return;} }
+
+
+ }
+
+
+
+
+
+
+
+
+
+int main(){
+
+  int t,i,j,n[50],*temp,m[50],*a[50];
+	scanf("%d",&t);
+
+	for(i=0;i<t;i++){
+
+		scanf("%d",&m[i]);
+		scanf("%d",&n[i]);
+		  temp=(int*)malloc(sizeof(int)*n[i]);
+		for(j=0;j<n[i];j++)
+			  scanf("%d",temp+j);
+
+			  a[i]=temp;
+
+	}
+
+		for(i=0;i<t;i++)
+			 print_index(a[i],n[i],m[i]);
+
+
+return 0;
+}

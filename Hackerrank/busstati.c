@@ -1,0 +1,51 @@
+#include<stdio.h>
+
+
+
+
+void print_possible_groupings(int a[],int n,int i,int c){
+
+			 int curr=0;
+           if(i>n-1) {printf("%d ",c);return;}
+			 if(a[i]>c) return;
+
+
+
+		  if(a[i]==c){
+				print_possible_groupings(a,n,i+1,c);  return;}
+
+				while(curr!=c && i<n){
+
+					 curr+=a[i];
+
+					 if(curr>c)return;
+					 i++;
+				}
+          if(i>n-1 && curr!=c)return;       
+				print_possible_groupings(a,n,i,curr);
+
+
+
+}
+
+
+int main(){
+
+ int i,n,a[20],curr,sum;
+	curr=0;sum=0;
+ scanf("%d",&n);
+
+  for(i=0;i<n;i++)
+	  scanf("%d",&a[i]);
+
+	  for(i=0;i<n;i++)sum+=a[i];
+
+	  for(i=0;i<n;i++){
+		 curr+=a[i];
+       if(sum%curr==0)
+		  print_possible_groupings(a,n,i+1,curr);
+		  }
+
+
+return 0;
+}

@@ -1,0 +1,154 @@
+//AVL Tree :: Insertion & Deletion
+#include<stdio.h>
+#include<stdlib.h>
+
+ //Declare a tree data structure
+struct tree {
+  int data;
+  struct tree *left,*right;
+  int height;
+};
+//Global root node
+struct tree *root;
+
+//Create a tree node
+  struct tree *create_node(int data){
+
+	 struct tree *temp;
+	 temp=(struct tree*)malloc(sizeof(struct tree));
+	 if(!temp){printf("Memory Error"); return NULL;}
+
+	 temp->data=data;
+	 temp->left=NULL;
+	 temp->right=NULL;
+
+	 return temp;
+}
+int maxp(int a,int b)
+{return a>b?a:b;}
+
+//Returns height of a node
+  int get_height(struct tree *root){
+	 if(!root)
+	 return 0;
+
+	 return maxp(get_height(root->left),get_height(root->right))+1;
+
+  }
+
+//Returns Balance-Factor of a node
+	  int get_balance(struct tree *root){
+	  if(!root)
+		 return 0;
+
+		 return get_height(root->left)-get_height(root->right);
+
+	  }
+
+//Right-Rotate
+struct tree *right_rotate(struct tree *y){
+	struct tree *x = y->left;
+
+
+	 struct tree *T2 = x?x->right:NULL;
+
+	 // Perform rotation
+ if(x)	 x->right = y;
+  if(y)	 y->left = T2;
+
+	 // Update heights
+  if(y)	 y->height = maxp(get_height(y->left),get_height(y->right))+1;
+	if(x) x->height = maxp(get_height(x->left),get_height(x->right))+1;
+
+	 // Return new root
+	 return x;
+}
+//Left-Rotate
+struct tree *left_rotate(struct tree *x){
+struct tree *y = x->right;
+	 struct tree *T2 = y->left;
+
+	 // Perform rotation
+	 y->left = x;
+	 x->right = T2;
+
+	 //  Update heights
+	 x->height = maxp(get_height(x->left),get_height(x->right))+1;
+	 y->height = maxp(get_height(y->left),get_height(y->right))+1;
+
+	 // Return new root
+	 return y;
+}
+
+//Insert a node in a BST
+	struct tree *insert_node(struct tree *root,int data){
+		 int balance_factor;
+		if(!root){
+		root=create_node(data);
+		return root;}
+
+		if(data>root->data)
+		 root->right=insert_node(root->right,data);
+
+		if(data<root->data)
+		 root->left=insert_node(root->left,data);
+
+	  //update root height after any possible insertion
+		  root->height=maxp(get_height(root->left),get_height(root->right))+1;
+
+
+		 balance_factor=get_balance(root);
+
+	//Condition for rotations
+
+		//left-left case
+		if(balance_factor>1 && data<root->left->data)
+			  return right_rotate(root);
+
+		//Left-Right case
+		if(balance_factor>1 && data>root->right->data)
+			  root->left=left_rotate(root->left);
+				return right_rotate(root);
+
+		//Right-Right case
+		  if(balance_factor<-1 && data>root->right->data)
+			  return left_rotate(root);
+
+		//Right-left case
+		if(balance_factor<-1 && data<root->right->data)
+			  root->right=right_rotate(root->right);
+				return left_rotate(root);
+
+		 return root;
+
+}
+//Preorder :: Tree Traversal
+	void preorder(struct tree *root){
+	  if(!root)
+		 return;
+	printf("%d ",root->data);
+	preorder(root->left);
+	preorder(root->right);
+
+	}
+
+
+
+void main(){
+
+
+  root=insert_node(root,10);
+  root= insert_node (root,5);
+  root=insert_node(root,6);
+  root=insert_node(root,13);
+	root=insert_node(root,12);
+
+  preorder(root);
+
+
+
+
+
+
+
+}

@@ -1,0 +1,112 @@
+// Maximum path intersection sum in two Linked lists
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node {
+
+ int data;
+ struct node *next;
+
+};
+
+struct node *root,*foot,*dummy;
+
+
+struct node *create_node(int data){
+
+    struct node *temp=(struct node *)malloc(sizeof(struct node));
+	temp->data=data;
+	temp->next=NULL;
+
+	return temp;
+
+}
+
+void move_ahead(struct node *r,struct node *s,struct node *m){
+
+	  struct node *p,*q,*tail;
+	  int lsum,rsum;
+	  lsum=0;rsum=0;
+
+	  p=r;q=s;tail=NULL;
+	  if(!p && !q)return;
+
+	  while(p || q){
+
+
+	  if(p && q){
+				  if(p->data<q->data){
+					lsum+=p->data;
+					p=p->next; }
+                    
+				 else if(p->data>q->data){
+					rsum+=q->data;
+					q=q->next; }
+				  else  if(p->data==q->data){
+		            lsum+=p->data;
+		            rsum+=p->data;
+                      break;  } }
+
+		  else	 if(p){lsum+=p->data;p=p->next;}
+			else {rsum+=q->data;q=q->next;}
+
+}
+
+	if(lsum>=rsum){m->next=r;tail=p;}
+	else{ m->next=s; tail=q;}
+
+	if(p && q)	move_ahead(p->next,q->next,tail);
+	  //else if(p)move_ahead(p->next,q,tail);
+     //else move_ahead(p,q->next,tail);
+
+}
+
+
+//Display list
+
+void display_list(struct node *head){
+	struct node *p=head;
+
+  if(!p){printf("Empty list\n");return; }
+	while(p!=NULL)
+	{
+
+	  printf("%d ",p->data);
+	  p=p->next;
+	}
+
+  printf("\n");
+  return;
+}
+
+
+int main(){
+	root=create_node(1);
+	root->next=create_node(3);
+	root->next->next=create_node(30);
+	root->next->next->next=create_node(90);
+	root->next->next->next->next=create_node(120);
+	root->next->next->next->next->next=create_node(240);
+	root->next->next->next->next->next->next=create_node(511);
+
+	foot=create_node(0);
+	foot->next=create_node(3);
+	foot->next->next=create_node(12);
+	foot->next->next->next=create_node(32);
+  foot->next->next->next->next=create_node(90);
+  foot->next->next->next->next->next=create_node(125);
+  foot->next->next->next->next->next->next=create_node(240);
+  foot->next->next->next->next->next->next->next=create_node(511);
+
+  dummy=create_node(5);
+                     // printf("%d",root->data);
+  display_list(root);
+  display_list(foot);
+
+     move_ahead(root,foot,dummy);
+  display_list(dummy->next);
+
+
+
+return 0;
+}

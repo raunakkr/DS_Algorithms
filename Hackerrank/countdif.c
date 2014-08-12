@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <assert.h>
+#define max 100000000000
+/* Head ends here */
+int count_pairs(int a[],int n,int k){
+    
+    long int *h=(long int *)calloc(max,sizeof(long int));
+	  int i,count=0;
+
+	  for(i=0;i<n;i++)
+		 h[a[i]]=1;
+
+
+	for(i=0;i<n;i++)
+		 if(a[i]-k>0 && a[i]-k <max && h[a[i]-k]==1)
+		 count++;
+
+
+			 return count;
+
+}
+
+int pairs(int a_size, int* a, int k) {
+    
+   int ans;
+    
+    /* Write your code here */
+    ans=count_pairs(a,a_size,k);
+    
+   return ans;
+}
+
+/* Tail starts here */
+int main() {
+    int res;
+    int _a[1000];
+    int _a_size,_a_i,_k;
+    scanf("%d %d", &_a_size,&_k);
+
+    for(_a_i = 0; _a_i < _a_size; _a_i++) { 
+        int _a_item;
+        scanf("%d", &_a_item);
+        
+        _a[_a_i] = _a_item;
+    }
+   res=pairs(_a_size,_a,_k);
+   printf("%d\n",res);    
+    return 0;
+}
+

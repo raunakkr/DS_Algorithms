@@ -1,0 +1,44 @@
+//MinCost Path :: Recursive and Dynamic Programming solution
+#include<stdio.h>
+#include<limits.h>
+
+int a[3][3]={{1,2,3},
+			  {4,8,2},
+			  {1,5,3}
+						 };
+  int m=3,n=3;
+
+
+//:: Recursive implementation
+ int min(int a ,int b){
+  return a<b?a:b;}
+
+int min_cost(int i,int j){
+
+  if(i==m-1 && j==n-1)
+		  return a[i][j];
+			if(i>m-1 || j>n-1)
+		return INT_MAX;
+
+
+
+	 return  a[i][j]+min(min_cost(i+1,j),min(min_cost(i,j+1),min_cost(i+1,j+1)));
+
+
+}
+
+
+
+
+
+
+
+void main(){
+
+  printf("Minimum cost path is %d",min_cost(0,0));;
+
+
+
+
+
+}

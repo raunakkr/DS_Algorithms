@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+ unsigned long  int max_no_chocolates(long int k){
+	 if(k%2==0)
+		return (k/2)*(k/2);
+		else
+		return (k/2)*(k/2+1);
+
+
+
+
+}
+
+
+
+void main(){
+	 int t,i;
+	 unsigned long  int a[10];
+	 scanf("%d",&t);
+	 for(i=0;i<t;i++)
+		  scanf("%llu",&a[i]);
+
+	 for(i=0;i<t;i++)
+		  printf("%llu\n",max_no_chocolates(a[i]));
+
+}

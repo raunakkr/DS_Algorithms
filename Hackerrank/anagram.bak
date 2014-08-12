@@ -1,0 +1,61 @@
+//:: Anagram
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+ int compare (const void * a, const void * b)
+{
+ return( strcmp((char *)a,(char *)b) );
+}
+
+int count_replacement(char *str){
+
+	 int *l,*r,i,j,c=0;
+	 int len=strlen(str);
+	 if(len%2!=0)return -1;
+
+	 qsort(str,len/2,sizeof(char),compare);
+	 qsort(str+len/2,len/2,sizeof(char),compare);
+
+	  i=0;j=len/2;
+	  l=(int*)calloc(26,sizeof(char));
+	  r=(int*)calloc(26,sizeof(char));
+
+	  for(i=0;i<len/2;i++)
+		l[*(str+i)]++;
+
+		for(i=len/2;i<len;i++)
+		r[*(str+i)]++;
+
+		for(i=0;i<26;i++)
+			if(l[(char)i+97]!=r[(char)i=97])
+			 c++;
+
+
+		  return c;
+
+}
+
+
+
+
+
+int main(){
+ int t,i;
+  char *temp,*s[100];
+
+  scanf("%d",&t);
+
+
+ for(i=0;i<t;i++) {
+		temp=(char*)malloc(sizeof(char)*1000);
+	  scanf("%s",temp);
+	  s[i]=temp;}
+
+	 for(i=0;i<t;i++) 
+  printf("%d\n",count_replacement(s[i]));
+
+
+
+return 0;
+}

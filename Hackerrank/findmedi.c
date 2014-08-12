@@ -1,0 +1,66 @@
+//Quick sort recursion based
+#include<stdio.h>
+#include<stdlib.h>
+ 
+
+ void swap(int a[],int i,int j){
+	int temp;
+	temp=a[i];
+	a[i]=a[j];
+	a[j]=temp;
+}
+ int partition(int a[],int low,int high,int n){
+	int left=low;
+	int right=high;
+	int pivot=a[low];
+
+	while(left<right){
+
+		while(a[left]<=pivot)
+				 left++;
+
+		 while(a[right]>pivot)
+				  right--;
+		 if(left<right)
+		 swap(a,left,right);
+}
+	 a[low]=a[right];
+	 a[right]=pivot;
+	 return right;
+
+ }
+
+int quicksort(int a[],int low,int high,int n){
+  int pivot;
+  if(high>low){
+
+    pivot=partition(a,low,high,n);
+
+	 if(pivot==n/2) return a[pivot];
+
+
+
+ quicksort(a,low,pivot-1,n);
+  quicksort(a,pivot+1,high,n);
+  }
+  return -1;
+
+
+ }
+int main(){
+
+  int i,n,*a;
+
+  scanf("%d",&n);
+  a=(int*)malloc(sizeof(int)*n);
+  for(i=0;i<n;i++)
+	 scanf("%d",a+i);
+
+	 
+	if(quicksort(a,0,n-1,n)==-1) printf("%d",a[n/2]);
+     else printf("%d",quicksort(a,0,n-1,n));
+
+	 //for(i=0;i<n;i++)
+		//printf("%d ",a[i]);
+	return 0;
+}
